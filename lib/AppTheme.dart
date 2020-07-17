@@ -18,7 +18,7 @@ class AppTheme{
 
 
 final ThemeData themeData = new ThemeData(
-  scaffoldBackgroundColor: Color(0xfffafafa),
+  scaffoldBackgroundColor: Color(0xffeaeaea),
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primaryColor: Colors.orange,
     backgroundColor: Color.fromARGB(255,250,250,250),

@@ -4,7 +4,6 @@ import 'package:rxdart/rxdart.dart';
 class AppBarHomeBloc {
   final List<String> _listUrlImage = new List();
   BehaviorSubject<List<String>> _subjectUrlImage;
-
   Stream get listUrlImageStream => _subjectUrlImage.stream;
 
   AppBarHomeBloc() {

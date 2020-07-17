@@ -36,6 +36,7 @@ dependencies:
   curved_navigation_bar: any
   fluttertoast: ^6.0.1
   flutter_swiper: ^1.1.6
+  dashed_circle: ^0.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
