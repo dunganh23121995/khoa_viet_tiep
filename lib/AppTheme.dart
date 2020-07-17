@@ -4,7 +4,10 @@ import 'package:path/path.dart';
 
 class AppTheme{
   AppTheme._();
+
   static const Color colorOrange = Color(0xfffc9c00);
+  static const Color colorTitleShowProduct1 = Color(0xffffffff);
+  static const Color colorTitleShowProduct2 = Color(0xfffc9c00);
   static const Color colorTextTitle = Color(0xfffc9c00);
   static const Color colorTextPrice = Color(0xfffc2600);
   static const Color colorTextUnPriceGrey = Color(0xffa6a6a6);
@@ -50,6 +53,11 @@ final ThemeData themeData = new ThemeData(
           fontWeight: FontWeight.w500,
           fontSize: 12,
           color: Colors.black
+        ),
+        caption: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.w700,
+          fontSize: 16
         ),
         button: TextStyle(
             color: Colors.white,
