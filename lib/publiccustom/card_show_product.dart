@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:khoaviettiep/AppTheme.dart';
 
 class ShowProduct extends StatelessWidget {
   ShowProduct({this.color = Colors.white});
@@ -46,19 +48,34 @@ class ShowProduct extends StatelessWidget {
                 )),
                 Row(
                   children: <Widget>[
-ButtonBar(
-
-  children: <Widget>[
-    Text("Xem thêm"),
-    Icon(Icons.keyboard_arrow_right)
-  ],
-)
+                    InkWell(
+                      onTap: () {
+                        FlutterToast(context).showToast(child: Text("Oh my god"));
+                      },
+                      child: ButtonBar(
+                        children: <Widget>[
+                          Text(
+                            "Xem thêm",
+                            style: TextStyle(color: AppTheme.colorTextTitle),
+                          ),
+                          Icon(
+                            Icons.keyboard_arrow_right,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
         ),
+        //row product 1
+        ListView(
+          children: <Widget>[
+          ],
+        )
       ],
     );
   }
