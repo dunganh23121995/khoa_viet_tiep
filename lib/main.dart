@@ -41,27 +41,33 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: StreamBuilder(
-          stream: _tabindexBloc.observablePage,
-          builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
-            return Container(
-              child: snapshot.hasData ? snapshot.data : Container(),
-            );
-          },
-        ),
-        bottomNavigationBar: _bottomNavigtionbar(
-          Icon(Icons.home),
-          "Trang chủ",
-          Icon(Icons.category),
-          "Danh mục",
-          Icon(Icons.scanner),
-          "Mã",
-          Icon(Icons.notifications_none),
-          "Thông báo",
-          Icon(Icons.perm_identity),
-          ""
-              "Cá nhân",
-        ));
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: <Widget>[
+          StreamBuilder(
+            stream: _tabindexBloc.observablePage,
+            builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+              return Container(
+                child: snapshot.hasData ? snapshot.data : Container(),
+              );
+            },
+          ),
+          _bottomNavigtionbar(
+              Icon(Icons.home),
+              "Trang chủ",
+              Icon(Icons.category),
+              "Danh mục",
+              Icon(Icons.scanner),
+              "Mã",
+              Icon(Icons.notifications_none),
+              "Thông báo",
+              Icon(Icons.perm_identity),
+              ""
+                  "Cá nhân",
+            ),
+        ],
+      ),
+    );
   }
 
   Widget _bottomNavigtionbar(
@@ -80,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
       alignment: Alignment.bottomCenter,
       children: <Widget>[
         Container(
+          color: Colors.transparent,
           child: StreamBuilder(
             stream: _tabindexBloc.observableIndex,
             builder: (context, AsyncSnapshot<int> snapshot) {

@@ -230,7 +230,8 @@ class NavCustomPainter extends CustomPainter {
     final paint = Paint()
       ..color = color
       ..style = PaintingStyle.fill
-      ..style = PaintingStyle.stroke; // Tạo khoảng trắng bên trong
+//      ..style = PaintingStyle.stroke
+    ; // Tạo khoảng trắng bên trong
 
     final path = Path()
       ..moveTo(0, 0)

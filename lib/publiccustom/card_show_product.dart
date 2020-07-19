@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:khoaviettiep/AppTheme.dart';
+import 'package:khoaviettiep/publiccustom/card_a_product.dart';
 
 class ShowProduct extends StatelessWidget {
   ShowProduct({this.color = Colors.white});
@@ -72,10 +73,20 @@ class ShowProduct extends StatelessWidget {
           ),
         ),
         //row product 1
-        ListView(
-          children: <Widget>[
-          ],
-        )
+        Container(
+          height: MediaQuery.of(context).size.height/4,
+          child:ListView(
+            padding: EdgeInsets.zero,
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+                  CardProduct(),
+                  CardProduct(),
+                  CardProduct(),
+                  CardProduct(),
+                  CardProduct(),
+            ],
+          ),
+        ),
       ],
     );
   }

@@ -33,8 +33,7 @@ class _HomePageState extends State {
 
   Widget _sliverAppbar() {
     return SliverAppBar(
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.0), bottomRight: Radius.circular(30.0))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30.0), bottomRight: Radius.circular(30.0))),
       key: _appbarKey,
       expandedHeight: 180.0,
       title: TextFormField(
@@ -124,6 +123,7 @@ class _HomePageState extends State {
       ),
     );
   }
+
   Widget _sliverNav() {
     return SliverToBoxAdapter(
       child: Container(
@@ -136,9 +136,7 @@ class _HomePageState extends State {
               das: 4,
               colorbutton: Colors.yellow,
               ontap: () {
-                setState(() {
-
-                });
+                setState(() {});
                 FlutterToast(context).showToast(child: Text("Ok men"));
               },
               child: Padding(
@@ -223,7 +221,6 @@ class _HomePageState extends State {
                 style: TextStyle(color: Colors.red),
               ),
             ),
-
           ],
         ),
       ),
@@ -233,8 +230,27 @@ class _HomePageState extends State {
   Widget _sliverBody() {
     return SliverList(
       delegate: SliverChildListDelegate(<Widget>[
-            ShowProduct()
-      ]),
+        Container(
+          margin: EdgeInsets.only(top: 5),
+          color: Colors.white,
+          child: ShowProduct(),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 5),
+          color: Colors.white,
+          child: ShowProduct(),
+        ),
+        Container(
+          margin: EdgeInsets.only(top: 5),
+          color: Colors.white,
+          child: ShowProduct(),
+        ),
+        Container(
+          color: Colors.white,
+          height: 60,
+        ),
+      ],
+      ),
     );
   }
 }

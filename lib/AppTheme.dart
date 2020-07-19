@@ -11,7 +11,7 @@ class AppTheme{
   static const Color colorTextTitle = Color(0xfffc9c00);
   static const Color colorTextPrice = Color(0xfffc2600);
   static const Color colorTextUnPriceGrey = Color(0xffa6a6a6);
-  static const Color colorbottomNavbar = Color(0xffa6a6a6);
+  static const Color colorbottomNavbar = Color(0xfff5f5f5);
   static const Color colorItemOnSearch = Color(0xffa6a6a6);
   static const Color colorAppbar = Color(0xffff9800);
   static const List<Color> colorListNav = <Color>[Color(0xff34bccc),Color(0xfffdb434),Color(0xff45b249),Color
