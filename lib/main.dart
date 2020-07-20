@@ -62,8 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Icon(Icons.notifications_none),
               "Thông báo",
               Icon(Icons.perm_identity),
-              ""
-                  "Cá nhân",
+              "Cá nhân",
             ),
         ],
       ),

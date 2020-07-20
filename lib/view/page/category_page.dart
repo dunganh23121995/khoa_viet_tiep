@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:khoaviettiep/publiccustom/card_a_product.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -38,17 +39,32 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
         children: <Widget>[
           Expanded(
             flex: 2,
-            child: ListView.builder(itemBuilder: (context,index){
-              return Container(
-                child: Tab(
-                  icon: Image.asset("assets/images/01504-copy.png"),
-                  child: Text("Why"),
-                ),
-                height: 120,
-              )
-              ;
-            },
-            itemCount: 5,),
+            child: FutureBuilder(
+              builder: (context,snapshot){
+                return ListView.builder(itemBuilder: (context,index){
+                  return InkWell(
+                    focusColor: Colors.red,
+                    highlightColor: Colors.green,
+                    onTap: (){
+                      FlutterToast(context).showToast(child: Text("Show here!"));
+                    },
+                    child: Container(
+                        color: Colors.white,
+                        padding: EdgeInsets.only(top: 10),
+                        child: Column(
+                          children: <Widget>[
+                            Image.network("http://khoaviettiep.com.vn/upload/Image/sanpham/Anh-moi-2/05204.png"),
+                            Text("Text")
+                          ],
+                        )
+                    ),
+                  )
+                  ;
+                },
+                  shrinkWrap: false,
+                  itemCount: 8,);
+              },
+            ),
           ),
           Expanded(
             flex: 8,

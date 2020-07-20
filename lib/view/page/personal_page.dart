@@ -14,6 +14,9 @@ class _PersonalPageState extends State{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Cá Nhân"),
+      ),
       body: Center(
         child: Text("Personal page"),
       ),
