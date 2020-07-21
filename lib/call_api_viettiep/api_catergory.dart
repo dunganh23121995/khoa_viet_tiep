@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:khoaviettiep/call_api_viettiep/end_point.dart';
 
@@ -11,14 +12,18 @@ factory ProductApi(){
 }
 ProductApi.Instance();
 
- Future<http.Response>  getCategoryTitle() {
+ Future<List<String>>  getCategoryListTitle() async{
   String body = '''
   <ns1:getTop>
   <ns1:quantity>20</ns1:quantity>
   <ns1:idmenu>195</ns1:idmenu>
   <ns1:active>true</ns1:active>
   </ns1:getTop>''';
-  return getResponse(moduleService: "WebService_Product", action: "getTop", bodyaction: body);
+  var response = await getResponse(moduleService: "WebService_Product", action: "getTop", bodyaction: body);
+  if(response.statusCode==200){
+
+  }
+//  return getResponse(moduleService: "WebService_Product", action: "getTop", bodyaction: body);
 }
 
 
