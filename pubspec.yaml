@@ -39,6 +39,7 @@ dependencies:
   dashed_circle: ^0.0.1
   http: ^0.12.2
   intl: ^0.16.0
+  xml2json: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

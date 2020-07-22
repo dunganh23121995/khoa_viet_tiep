@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:khoaviettiep/call_api_viettiep/api_catergory.dart';
 import 'package:khoaviettiep/publiccustom/card_a_product.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -12,14 +13,13 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State with TickerProviderStateMixin {
-
   Key keyCategory = new Key('Cate');
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    ProductApi.Instance().getCategoryListTitle();
   }
 
   @override
@@ -40,8 +40,11 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
           Expanded(
             flex: 2,
             child: FutureBuilder(
-              builder: (context,snapshot){
-                return ListView.builder(itemBuilder: (context,index){
+              future: ProductApi.Instance().getCategoryListTitle(),
+              builder: (context,AsyncSnapshot<String> snapshot){
+                print(snapshot);
+                return  snapshot.hasData?
+                 ListView.builder(itemBuilder: (context,index){
                   return InkWell(
                     focusColor: Colors.red,
                     highlightColor: Colors.green,
@@ -53,7 +56,7 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
                         padding: EdgeInsets.only(top: 10),
                         child: Column(
                           children: <Widget>[
-                            Image.network("http://khoaviettiep.com.vn/upload/Image/sanpham/Anh-moi-2/05204.png"),
+                            Image.network("http://khoaviettiep.com.vn/upload/Image/sanpham/khoa-dien-tu/28384/3.png}"),
                             Text("Text")
                           ],
                         )
@@ -61,8 +64,7 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
                   )
                   ;
                 },
-                  shrinkWrap: false,
-                  itemCount: 8,);
+                  itemCount: snapshot.data.length,):Container(child: Text("Không có dữ liệu"),);
               },
             ),
           ),

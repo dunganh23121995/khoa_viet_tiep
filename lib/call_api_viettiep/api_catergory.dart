@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:khoaviettiep/call_api_viettiep/end_point.dart';
+import 'package:khoaviettiep/lists_variable.dart';
 
 class ProductApi extends EndPoint{
 static ProductApi _productApi;
@@ -12,21 +13,49 @@ factory ProductApi(){
 }
 ProductApi.Instance();
 
- Future<List<String>>  getCategoryListTitle() async{
-  String body = '''
-  <ns1:getTop>
-  <ns1:quantity>20</ns1:quantity>
-  <ns1:idmenu>195</ns1:idmenu>
-  <ns1:active>true</ns1:active>
-  </ns1:getTop>''';
-  var response = await getResponse(moduleService: "WebService_Product", action: "getTop", bodyaction: body);
-  if(response.statusCode==200){
-
+  @override
+  String action() {
+    // TODO: implement action
+    return 'GetMenuByTypeAndCatID';
   }
+
+  @override
+  String bodysoap() {
+    // TODO: implement bodysoap
+    return '''
+      <id_menu_vitri>1</id_menu_vitri>
+      <Type>
+        <string>san-pham</string>
+      </Type>
+      <catid>195</catid>
+      <lang>1</lang>
+ ''';
+  }
+
+  @override
+  String nameModuleService() {
+    // TODO: implement moduleService
+    return 'WebService_Menu';
+  }
+
+
+
+Future<String>  getCategoryListTitle() async{
+  Future<http.Response> fresponse = this.getResponse();
+
+  await fresponse.then((response) {
+    if(response.statusCode==200){
+     Map body = getJsonBodyfromResponse(response);
+     if(body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode']==ErrCodeSuccess.toString()){
+       print(body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu']);
+       return  new Future.value("meow");
+     }
+     return null;
+    }
+  });
+
 //  return getResponse(moduleService: "WebService_Product", action: "getTop", bodyaction: body);
 }
-
-
 
 
 }
