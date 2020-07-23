@@ -3,15 +3,15 @@ import 'package:http/http.dart' as http;
 import 'package:khoaviettiep/call_api_viettiep/end_point.dart';
 import 'package:khoaviettiep/lists_variable.dart';
 
-class ProductApi extends EndPoint{
-static ProductApi _productApi;
-factory ProductApi(){
+class MenuApi extends EndPoint{
+static MenuApi _productApi;
+factory MenuApi(){
   if(_productApi==null){
-      _productApi = ProductApi.Instance();
+      _productApi = MenuApi.Instance();
   }
   return _productApi;
 }
-ProductApi.Instance();
+MenuApi.Instance();
 
   @override
   String action() {
@@ -37,25 +37,6 @@ ProductApi.Instance();
     // TODO: implement moduleService
     return 'WebService_Menu';
   }
-
-
-
-Future<String>  getCategoryListTitle() async{
-  Future<http.Response> fresponse = this.getResponse();
-
-  await fresponse.then((response) {
-    if(response.statusCode==200){
-     Map body = getJsonBodyfromResponse(response);
-     if(body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode']==ErrCodeSuccess.toString()){
-       print(body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu']);
-       return  new Future.value("meow");
-     }
-     return null;
-    }
-  });
-
-//  return getResponse(moduleService: "WebService_Product", action: "getTop", bodyaction: body);
-}
 
 
 }
