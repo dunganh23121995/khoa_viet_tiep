@@ -11,12 +11,18 @@ factory MenuApi(){
   }
   return _productApi;
 }
+int catid;
 MenuApi.Instance();
 
   @override
   String action() {
     // TODO: implement action
     return 'GetMenuByTypeAndCatID';
+  }
+
+  getResponseMenu({catid=195}){
+      this.catid=catid;
+      return getResponse();
   }
 
   @override
@@ -27,7 +33,7 @@ MenuApi.Instance();
       <Type>
         <string>san-pham</string>
       </Type>
-      <catid>195</catid>
+      <catid>${this.catid}</catid>
       <lang>1</lang>
  ''';
   }

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml2json/xml2json.dart';
-
 abstract class EndPoint {
   String _host = "apps.soft.com.vn", _subpath = "viettiepapi/api";
 
