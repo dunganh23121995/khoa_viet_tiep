@@ -165,13 +165,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
-  loading:
+  loading_indicator:
     dependency: "direct main"
     description:
-      name: loading
+      name: loading_indicator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.2.0"
   matcher:
     dependency: transitive
     description:

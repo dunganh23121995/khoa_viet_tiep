@@ -4,8 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:khoaviettiep/AppTheme.dart';
 import 'package:khoaviettiep/bloc_list/categorypage/caption_bloc.dart';
-import 'package:loading/indicator/ball_spin_fade_loader_indicator.dart';
-import 'package:loading/loading.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class CategoryPage extends StatefulWidget {
   @override
@@ -18,7 +17,6 @@ class CategoryPage extends StatefulWidget {
 class _CategoryPageState extends State with TickerProviderStateMixin {
   Key keyCategory = new Key('Cate');
   CaptionBloc _captionBloc;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -43,21 +41,20 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
         children: <Widget>[
           Expanded(
             flex: 2,
-            child: _showMenuCaption(),
+            child: _showCaption(),
           ),
           Expanded(
             flex: 8,
             child: Center(
-              child: Image.network(
-                  "https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg"),
-            ),
+              child: _showMenu()
+          )
           )
         ],
       ),
     );
   }
 
-  Widget _showMenuCaption() {
+  Widget _showCaption() {
     return StreamBuilder(
       stream: _captionBloc.captionStream,
       builder: (context, AsyncSnapshot snapshot) {
@@ -141,12 +138,24 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
                         child: Container(
                       padding: EdgeInsets.all(20),
                       height: MediaQuery.of(context).size.height / 8,
-                      child: Loading(indicator: new BallSpinFadeLoaderIndicator(), color: Colors.orange.withAlpha(50)),
+                      child:LoadingIndicator(
+                        indicatorType: Indicator.ballTrianglePath,
+                      ),
                     ));
                   },
                   itemCount: 10,
                 ),
               );
+      },
+    );
+  }
+
+  Widget _showMenu(){
+    return StreamBuilder(
+      stream: _captionBloc.menuStream,
+      builder: (context,snapshot){
+        print(snapshot.data);
+        return Container();
       },
     );
   }

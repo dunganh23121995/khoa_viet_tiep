@@ -3,23 +3,16 @@ import 'package:khoaviettiep/lists_variable.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CaptionBloc {
-  List<Map<String, dynamic>> listcaption;
-  BehaviorSubject<List> _behaviorSubjectCaption;
-  BehaviorSubject<Map<String, dynamic>> _behaviorSubjectMenu;
-  BehaviorSubject<int> _behaviorSubjectIndex;
+  List listcaption;
+  List listmenu;
+  int indexcaption;
+  PublishSubject<List> _behaviorSubjectCaption;
+  PublishSubject<List> _behaviorSubjectMenu;
+  PublishSubject<int> _behaviorSubjectIndex;
+
 
   Stream get captionStream {
-    MenuApi.Instance().getResponseMenu(catid: 195).then((response) {
-      if (response.statusCode == 200) {
-        var body = MenuApi.Instance().getJsonBodyfromResponse(response);
-        if (body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode'] ==
-            ErrCodeSuccess.toString()) {
-          _behaviorSubjectCaption.sink
-              .add(body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu']);
-          _behaviorSubjectIndex.sink.add(0);
-        }
-      }
-    });
+
     return _behaviorSubjectCaption.stream;
   }
 
@@ -28,13 +21,68 @@ class CaptionBloc {
     return _behaviorSubjectIndex.stream;
   }
 
+  Stream get menuStream{
+
+    return _behaviorSubjectMenu.stream;
+  }
+
   onClickCaption({index}) {
+    indexcaption=index;
     _behaviorSubjectIndex.sink.add(index);
+
+    if(listcaption.length!=0){
+      MenuApi.Instance().getResponseMenu(catid: int.parse(listcaption[indexcaption]['id'])).then((response) {
+        if (response.statusCode == 200) {
+          var body = MenuApi.Instance().getJsonBodyfromResponse(response);
+          if (body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode'] ==
+              ErrCodeSuccess.toString()) {
+            listmenu = body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu'];
+            print(listmenu);
+            _behaviorSubjectMenu.sink
+                .add(listmenu);
+          }
+        }
+      });
+    }
+
   }
 
   CaptionBloc()
       : listcaption = new List(),
-        _behaviorSubjectCaption = new BehaviorSubject(),
-        _behaviorSubjectMenu = new BehaviorSubject(),
-        _behaviorSubjectIndex = new BehaviorSubject() {}
+        _behaviorSubjectCaption = new PublishSubject(),
+        _behaviorSubjectIndex = new PublishSubject(),
+        _behaviorSubjectMenu=new PublishSubject(),
+        indexcaption=0{
+
+    MenuApi.Instance().getResponseMenu(catid: 195).then((response) {
+      if (response.statusCode == 200) {
+        var body = MenuApi.Instance().getJsonBodyfromResponse(response);
+        if (body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode'] ==
+            ErrCodeSuccess.toString()) {
+          listcaption = body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu'];
+          _behaviorSubjectCaption.sink
+              .add(listcaption);
+          _behaviorSubjectIndex.sink.add(indexcaption);
+          // Lay menu cho caption dau
+          if(listcaption.length!=0){
+            MenuApi.Instance().getResponseMenu(catid: int.parse(listcaption[0]['id'])).then((response) {
+              if (response.statusCode == 200) {
+                var body = MenuApi.Instance().getJsonBodyfromResponse(response);
+                if (body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode'] ==
+                    ErrCodeSuccess.toString()) {
+                  listmenu = body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu'];
+                  print(listmenu);
+                  _behaviorSubjectMenu.sink
+                      .add(listmenu);
+                }
+              }
+            });
+          }
+
+
+
+        }
+      }
+    });
+  }
 }
