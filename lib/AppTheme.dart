@@ -9,6 +9,7 @@ class AppTheme{
   static const Color colorTitleShowProduct1 = Color(0xffffffff);
   static const Color colorTitleShowProduct2 = Color(0xfffc9c00);
   static const Color colorTextTitle = Color(0xfffc9c00);
+  static const Color colorTextAppbar = Color(0xffffffff);
   static const Color colorTextPrice = Color(0xfffc2600);
   static const Color colorTextUnPriceGrey = Color(0xffa6a6a6);
   static const Color colorbottomNavbar = Color(0xfff5f5f5);

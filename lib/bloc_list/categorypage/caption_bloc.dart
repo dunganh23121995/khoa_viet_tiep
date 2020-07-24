@@ -28,16 +28,20 @@ class CaptionBloc {
 
   onClickCaption({index}) {
     indexcaption=index;
-    _behaviorSubjectIndex.sink.add(index);
-
     if(listcaption.length!=0){
       MenuApi.Instance().getResponseMenu(catid: int.parse(listcaption[indexcaption]['id'])).then((response) {
+        _behaviorSubjectIndex.sink.add(indexcaption);
         if (response.statusCode == 200) {
           var body = MenuApi.Instance().getJsonBodyfromResponse(response);
           if (body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode'] ==
               ErrCodeSuccess.toString()) {
-            listmenu = body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu'];
-            print(listmenu);
+            if(body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']==null){
+              listmenu.clear();
+              listmenu.add(listcaption[index]);
+            }
+            else{
+              listmenu = body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu'];
+            }
             _behaviorSubjectMenu.sink
                 .add(listmenu);
           }
@@ -62,25 +66,8 @@ class CaptionBloc {
           listcaption = body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu'];
           _behaviorSubjectCaption.sink
               .add(listcaption);
-          _behaviorSubjectIndex.sink.add(indexcaption);
-          // Lay menu cho caption dau
-          if(listcaption.length!=0){
-            MenuApi.Instance().getResponseMenu(catid: int.parse(listcaption[0]['id'])).then((response) {
-              if (response.statusCode == 200) {
-                var body = MenuApi.Instance().getJsonBodyfromResponse(response);
-                if (body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode'] ==
-                    ErrCodeSuccess.toString()) {
-                  listmenu = body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu'];
-                  print(listmenu);
-                  _behaviorSubjectMenu.sink
-                      .add(listmenu);
-                }
-              }
-            });
-          }
-
-
-
+          if(listcaption.length!=0)
+          onClickCaption(index: indexcaption);
         }
       }
     });

@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:khoaviettiep/AppTheme.dart';
 import 'package:khoaviettiep/bloc_list/categorypage/caption_bloc.dart';
+import 'package:khoaviettiep/view/products.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -17,6 +18,7 @@ class CategoryPage extends StatefulWidget {
 class _CategoryPageState extends State with TickerProviderStateMixin {
   Key keyCategory = new Key('Cate');
   CaptionBloc _captionBloc;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -35,7 +37,12 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
     // TODO: implement build
 
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("Danh mục sản phẩm",style: TextStyle(
+          color: AppTheme.colorTextAppbar
+        ),),
+      ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -43,12 +50,7 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
             flex: 2,
             child: _showCaption(),
           ),
-          Expanded(
-            flex: 8,
-            child: Center(
-              child: _showMenu()
-          )
-          )
+          Expanded(flex: 8, child: Center(child: _showMenu()))
         ],
       ),
     );
@@ -79,10 +81,10 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
                           margin: EdgeInsets.zero,
                           decoration: snapshotIndex.data == index
                               ? BoxDecoration(
-                              color: Colors.white,
-                              border: Border(
-                                bottom: BorderSide(color: AppTheme.colorAppbar, style: BorderStyle.solid, width: 2),
-                              ))
+                                  color: Colors.white,
+                                  border: Border(
+                                    bottom: BorderSide(color: AppTheme.colorAppbar, style: BorderStyle.solid, width: 2),
+                                  ))
                               : BoxDecoration(color: Colors.white),
                           padding: EdgeInsets.only(
                               bottom: index == snapshot.data.length - 1 ? MediaQuery.of(context).size.height / 12 : 0),
@@ -92,7 +94,6 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
                               highlightColor: Colors.white,
                               splashColor: Colors.white,
                               onPressed: () {
-                                FlutterToast(context).showToast(child: Text("Show here!"));
                                 _captionBloc.onClickCaption(index: index);
                               },
                               child: Container(
@@ -138,8 +139,8 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
                         child: Container(
                       padding: EdgeInsets.all(20),
                       height: MediaQuery.of(context).size.height / 8,
-                      child:LoadingIndicator(
-                        indicatorType: Indicator.ballTrianglePath,
+                      child: LoadingIndicator(
+                        indicatorType: Indicator.ballSpinFadeLoader,
                       ),
                     ));
                   },
@@ -150,13 +151,66 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
     );
   }
 
-  Widget _showMenu(){
-    return StreamBuilder(
-      stream: _captionBloc.menuStream,
-      builder: (context,snapshot){
-        print(snapshot.data);
-        return Container();
-      },
+  Widget _showMenu() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: <Widget>[
+          Flexible(
+            flex: 2,
+            child:
+                Image.network("http://khoaviettiep.com.vn/upload/Image/slideshow/banner-45nam-bo3khoa-trungchia.jpg",
+                fit: BoxFit.fitHeight,),
+          ),
+          Flexible(
+            flex: 1,
+            child: StreamBuilder(
+              stream: _captionBloc.indexStream,
+              builder: (context, indexSnapshot){
+                return indexSnapshot.hasData&&_captionBloc.listcaption.length!=0?
+                    Container(
+                      color: Colors.white,
+                      child: ListTile(
+                        title: Text("${_captionBloc.listcaption[indexSnapshot.data]['title']}".toUpperCase(),style:
+                        TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.colorTextTitle
+                        ),),
+                      ),
+                    ):
+                Container(
+                );
+              },
+            ),
+          ),
+          Flexible(
+            flex: 8,
+            child: StreamBuilder(
+              stream: _captionBloc.menuStream,
+              builder: (context, snapshot) {
+                return snapshot.hasData
+                    ? ListView.separated(
+                        separatorBuilder: (context, index) => Divider(height: 0,),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            color: Colors.white,
+                            child: ListTile(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductsShow()));
+                              },
+                              dense: true,
+                              title: Text("${snapshot.data[index]['title']}"),
+                              trailing: Icon(Icons.arrow_right),
+                            ),
+                          );
+                        },
+                        itemCount: snapshot.data.length)
+                    : Container();
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }
