@@ -1,7 +1,15 @@
 import 'package:khoaviettiep/call_api_viettiep/end_point.dart';
 
 class ProductsApi extends EndPoint{
-  String body='';
+  static ProductsApi _productsApi;
+  factory ProductsApi(){
+    _productsApi==null?{_productsApi = ProductsApi.Instance()}:{};
+    return _productsApi;
+  }
+  ProductsApi.Instance();
+
+   static String body='';
+
   @override
   String action() {
     // TODO: implement action
@@ -20,8 +28,8 @@ class ProductsApi extends EndPoint{
     return "WebService_Product";
   }
 
-  getResponseProductsWithIdMenu({idMenu}){
-    this.body = '''
+   Future getResponseProductsWithIdMenu({idMenu}){
+    ProductsApi.body = '''
           <pagesize>10</pagesize>
       <currentpage>1</currentpage>
       <idmenu>${idMenu}</idmenu>
@@ -30,4 +38,5 @@ class ProductsApi extends EndPoint{
     ''';
     return getResponse();
   }
+
 }

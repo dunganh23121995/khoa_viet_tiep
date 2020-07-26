@@ -20,5 +20,5 @@ const ErrCodeAlreadyExist=5;
 const ErrCodeNotExist=6;
 
 
-
+const String linkweb = "http://viettieplock.com/";
 

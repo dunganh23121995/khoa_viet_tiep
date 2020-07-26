@@ -74,17 +74,19 @@ class ShowProduct extends StatelessWidget {
         ),
         //row product 1
         Container(
-          height: MediaQuery.of(context).size.height/4,
-          child:ListView(
-            padding: EdgeInsets.zero,
+          width: double.infinity,
+          child:SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            children: <Widget>[
-                  CardProduct(),
-                  CardProduct(),
-                  CardProduct(),
-                  CardProduct(),
-                  CardProduct(),
-            ],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                CardProduct(),
+                CardProduct(),
+                CardProduct(),
+                CardProduct(),
+                CardProduct(),
+              ],
+            ),
           ),
         ),
       ],

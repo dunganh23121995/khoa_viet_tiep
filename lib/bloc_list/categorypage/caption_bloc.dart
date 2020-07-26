@@ -57,12 +57,14 @@ class CaptionBloc {
         _behaviorSubjectIndex = new PublishSubject(),
         _behaviorSubjectMenu=new PublishSubject(),
         indexcaption=0{
-
     MenuApi.Instance().getResponseMenu(catid: 195).then((response) {
       if (response.statusCode == 200) {
         var body = MenuApi.Instance().getJsonBodyfromResponse(response);
+        print(body);
+
         if (body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode'] ==
             ErrCodeSuccess.toString()) {
+
           listcaption = body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['Data']['menu'];
           _behaviorSubjectCaption.sink
               .add(listcaption);

@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:khoaviettiep/AppTheme.dart';
 import 'package:khoaviettiep/bloc_list/categorypage/caption_bloc.dart';
+import 'package:khoaviettiep/bloc_list/products/products_bloc.dart';
 import 'package:khoaviettiep/view/products.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
@@ -188,6 +189,7 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
             child: StreamBuilder(
               stream: _captionBloc.menuStream,
               builder: (context, snapshot) {
+                print(snapshot.data);
                 return snapshot.hasData
                     ? ListView.separated(
                         separatorBuilder: (context, index) => Divider(height: 0,),
@@ -197,6 +199,7 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
                             child: ListTile(
                               onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductsShow()));
+                                ProductsBloc.Instance().getProductsWithId(idmenu: snapshot.data[index]['id']);
                               },
                               dense: true,
                               title: Text("${snapshot.data[index]['title']}"),
