@@ -60,7 +60,6 @@ class CaptionBloc {
     MenuApi.Instance().getResponseMenu(catid: 195).then((response) {
       if (response.statusCode == 200) {
         var body = MenuApi.Instance().getJsonBodyfromResponse(response);
-        print(body);
 
         if (body['GetMenuByTypeAndCatIDResponse']['GetMenuByTypeAndCatIDResult']['ErrCode'] ==
             ErrCodeSuccess.toString()) {

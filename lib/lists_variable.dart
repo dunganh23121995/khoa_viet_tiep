@@ -20,5 +20,6 @@ const ErrCodeAlreadyExist=5;
 const ErrCodeNotExist=6;
 
 
-const String linkweb = "http://viettieplock.com/";
+const String linkweb = "http://khoaviettiep.com.vn/";
+const String linkdefaultimage = "/upload/product_imgs/2016/12/650/01504-copy.png";
 

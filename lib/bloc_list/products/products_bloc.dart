@@ -19,14 +19,23 @@ class ProductsBloc {
     ProductsApi.Instance().getResponseProductsWithIdMenu(idMenu: idmenu).then((response){
       if(response.statusCode==200){
         var body = ProductsApi.Instance().getJsonBodyfromResponse(response)['getPagedWithIDMenuResponse']['getPagedWithIDMenuResult'];
+        print(body);
         if(body['ErrCode']==ErrCodeSuccess.toString()){
           if(body['Data']!=null){
-            print(body.toString()+"BODY HEREEEE");
-            ProductsBloc.products = body['Data']['ItemNew'];
-
-            _publishSubjectProducts.sink.add(body['Data']['ItemNew']);
-
+            if(body['Data']['ItemNew'] is List){
+              ProductsBloc.products = body['Data']['ItemNew'];
+            }
+            else{
+              ProductsBloc.products.clear();
+              ProductsBloc.products.add(body['Data']['ItemNew']);
+            }
           }
+          else{
+            //Data is null
+            ProductsBloc.products.clear();
+            ProductsBloc.products.add({'title':'Sản phẩm hiện chưa có','giaban':'0','giathitruong':'0','anhdaidien':linkdefaultimage});
+          }
+          _publishSubjectProducts.sink.add(ProductsBloc.products);
         }
       }
     });

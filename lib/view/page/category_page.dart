@@ -189,7 +189,6 @@ class _CategoryPageState extends State with TickerProviderStateMixin {
             child: StreamBuilder(
               stream: _captionBloc.menuStream,
               builder: (context, snapshot) {
-                print(snapshot.data);
                 return snapshot.hasData
                     ? ListView.separated(
                         separatorBuilder: (context, index) => Divider(height: 0,),

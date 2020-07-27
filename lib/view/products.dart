@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:khoaviettiep/AppTheme.dart';
 import 'package:khoaviettiep/bloc_list/products/products_bloc.dart';
 import 'package:khoaviettiep/lists_variable.dart';
 import 'package:khoaviettiep/publiccustom/card_a_product.dart';
 import 'package:khoaviettiep/publiccustom/card_show_product.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class ProductsShow extends StatefulWidget {
   ProductsShow({this.idmenu = 195});
@@ -32,7 +34,6 @@ class _ProductsShow extends State {
         body: StreamBuilder(
           stream: ProductsBloc.Instance().productsStream,
           builder: (context, snapshot) {
-            print(snapshot.data);
             return snapshot.hasData
                 ? GridView.builder(
                 itemCount: snapshot.data.length,
@@ -41,6 +42,7 @@ class _ProductsShow extends State {
                     itemBuilder: (context, index) {
                       return Container(
                         child: CardProduct(
+                          ishot: true,
                           image: Image.network('${linkweb}${snapshot.data[index]['anhdaidien']}'),
                           name: snapshot.data[index]['title'],
                           price: int.parse(snapshot.data[index]['giaban']),
@@ -48,7 +50,10 @@ class _ProductsShow extends State {
                         ),
                       );
                     })
-                : Container();
+                : LoadingIndicator(
+              indicatorType: Indicator.ballClipRotateMultiple,
+              color: AppTheme.colorOrange,
+            );
           },
         ));
   }
