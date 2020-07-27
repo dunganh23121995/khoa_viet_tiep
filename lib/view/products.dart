@@ -42,7 +42,8 @@ class _ProductsShow extends State {
                     itemBuilder: (context, index) {
                       return Container(
                         child: CardProduct(
-                          ishot: true,
+                          ishot: snapshot.data[index]['ishot']=="true",
+                          isnew:snapshot.data[index]['updated']!=null?(DateTime.now().subtract(Duration(days: 365*2))).isBefore(DateTime.parse(snapshot.data[index]['updated'])):false,
                           image: Image.network('${linkweb}${snapshot.data[index]['anhdaidien']}'),
                           name: snapshot.data[index]['title'],
                           price: int.parse(snapshot.data[index]['giaban']),

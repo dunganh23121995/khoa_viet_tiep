@@ -7,6 +7,8 @@ import 'package:khoaviettiep/publiccustom/card_a_product.dart';
 
 class ShowProduct extends StatelessWidget {
   ShowProduct({this.color = Colors.white});
+  String title;
+  Widget textaction,iconaction;
 
   Color color;
 
