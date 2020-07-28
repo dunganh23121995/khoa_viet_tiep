@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -133,8 +134,8 @@ class _HomePageState extends State {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             CircleTitleButton(
-              das: 4,
-              colorbutton: Colors.yellow,
+              das: 20,
+              colorbutton: Color(0xff34bccc),
               ontap: () {
                 setState(() {});
                 FlutterToast(context).showToast(child: Text("Ok men"));
@@ -142,22 +143,59 @@ class _HomePageState extends State {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(
-                  Icons.repeat,
+                  Icons.lock_outline,
                   size: 30,
+                  color: Colors.white,
                 ),
               ),
               title: Text(
-                "Button",
-                style: TextStyle(),
+                "Hàng mới",
+                style: TextStyle(fontWeight: FontWeight.w700),
               ),
-              notification: Text(
-                "1",
-                style: TextStyle(color: Colors.red),
+              notification: Icon(Icons.fiber_new,color: Colors.deepOrangeAccent,)
+
+            ),
+            CircleTitleButton(
+              das: 20,
+              colorbutton: Colors.orangeAccent,
+              ontap: () {
+                FlutterToast(context).showToast(child: Text("Ok men"));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.style,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              ),
+              title: Text(
+                "Mã ưu đãi",
+                style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
             CircleTitleButton(
-              das: 4,
-              colorbutton: Colors.yellow,
+              das: 20,
+              colorbutton: Color(0xff45b249),
+              ontap: () {
+                FlutterToast(context).showToast(child: Text("Ok men"));
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.card_giftcard,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              ),
+              title: Text(
+                "Việt Tiệp ID",
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+            ),
+            CircleTitleButton(
+              das: 20,
+              colorbutton: Color(0xffff6223),
               ontap: () {
                 FlutterToast(context).showToast(child: Text("Ok men"));
               },
@@ -169,56 +207,8 @@ class _HomePageState extends State {
                 ),
               ),
               title: Text(
-                "Button",
-                style: TextStyle(),
-              ),
-              notification: Text(
-                "1",
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-            CircleTitleButton(
-              das: 4,
-              colorbutton: Colors.yellow,
-              ontap: () {
-                FlutterToast(context).showToast(child: Text("Ok men"));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.repeat,
-                  size: 30,
-                ),
-              ),
-              title: Text(
-                "Button",
-                style: TextStyle(),
-              ),
-              notification: Text(
-                "1",
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-            CircleTitleButton(
-              das: 4,
-              colorbutton: Colors.yellow,
-              ontap: () {
-                FlutterToast(context).showToast(child: Text("Ok men"));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.repeat,
-                  size: 30,
-                ),
-              ),
-              title: Text(
-                "Button",
-                style: TextStyle(),
-              ),
-              notification: Text(
-                "1",
-                style: TextStyle(color: Colors.red),
+                "Đơn hàng",
+                style: TextStyle(fontWeight: FontWeight.w700),
               ),
             ),
           ],
@@ -235,20 +225,7 @@ class _HomePageState extends State {
           color: Colors.white,
           child: ShowProduct(),
         ),
-        Container(
-          margin: EdgeInsets.only(top: 5),
-          color: Colors.white,
-          child: ShowProduct(),
-        ),
-        Container(
-          margin: EdgeInsets.only(top: 5),
-          color: Colors.white,
-          child: ShowProduct(),
-        ),
-        Container(
-          color: Colors.white,
-          height: 60,
-        ),
+
       ],
       ),
     );

@@ -42,9 +42,10 @@ class _ProductsShow extends State {
                     itemBuilder: (context, index) {
                       return Container(
                         child: CardProduct(
+                          width: double.infinity,
                           ishot: snapshot.data[index]['ishot']=="true",
                           isnew:snapshot.data[index]['updated']!=null?(DateTime.now().subtract(Duration(days: 365*2))).isBefore(DateTime.parse(snapshot.data[index]['updated'])):false,
-                          image: Image.network('${linkweb}${snapshot.data[index]['anhdaidien']}'),
+                          image: Image.network('${linkweb}${snapshot.data[index]['anhdaidien']}',fit: BoxFit.fitWidth,),
                           name: snapshot.data[index]['title'],
                           price: int.parse(snapshot.data[index]['giaban']),
                           cost: int.parse(snapshot.data[index]['giathitruong']),

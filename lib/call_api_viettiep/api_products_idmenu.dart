@@ -9,11 +9,11 @@ class ProductsApi extends EndPoint{
   ProductsApi.Instance();
 
    static String body='';
-
+  static String myaction ='';
   @override
   String action() {
     // TODO: implement action
-    return "getPagedWithIDMenu";
+    return myaction;
   }
 
   @override
@@ -29,6 +29,7 @@ class ProductsApi extends EndPoint{
   }
 
    Future getResponseProductsWithIdMenu({idMenu}){
+    myaction = 'getPagedWithIDMenu';
     ProductsApi.body = '''
           <pagesize>10</pagesize>
       <currentpage>1</currentpage>
@@ -38,5 +39,14 @@ class ProductsApi extends EndPoint{
     ''';
     return getResponse();
   }
-
+  Future getResponseProductsTopWithIsHot(){
+    myaction = 'getTopWithIshot';
+    ProductsApi.body = '''
+        <quantity>10</quantity>
+      <idmenu>-1</idmenu>
+      <active>true</active>
+      <ishot>true</ishot>
+    ''';
+    return getResponse();
+  }
 }

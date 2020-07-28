@@ -14,7 +14,7 @@ class CircleTitleButton extends MaterialButton{
   GestureTapCallback ontap;
    Widget child,notification,title;
   final Color colorbutton;
-  double stroke=5.0;
+  double stroke=1.0;
   int das;
   @override
   Widget build(BuildContext context) {
@@ -22,6 +22,7 @@ class CircleTitleButton extends MaterialButton{
       splashColor: Colors.transparent,
       onTap: ontap,
       child: Stack(
+        overflow: Overflow.visible,
         alignment: Alignment.topRight,
         children: <Widget>[
           Column(
@@ -51,7 +52,8 @@ class CircleTitleButton extends MaterialButton{
             ],
           ),
           Positioned(
-            top: 10,
+            top: 2,
+            right: -5,
             child: notification,
           ),
         ],

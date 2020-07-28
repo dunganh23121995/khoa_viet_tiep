@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/src/scheduler/ticker.dart';
 import 'package:intl/intl.dart';
 import 'package:khoaviettiep/AppTheme.dart';
 
@@ -11,6 +10,7 @@ class CardProduct extends StatelessWidget {
   int price, cost;
   String name;
   bool ishot, isnew, isbestbuy;
+  double height,width;
   CardProduct(
       {this.image,
       this.name = "Tên sản phẩm",
@@ -19,7 +19,7 @@ class CardProduct extends StatelessWidget {
       this.ontap,
       this.ishot = false,
       this.isnew = false,
-      this.isbestbuy = false}){
+      this.isbestbuy = false,this.height=null,this.width=null}){
   }
 
 
@@ -30,6 +30,8 @@ class CardProduct extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: <Widget>[
         Container(
+          height: height,
+          width: width,
           padding: const EdgeInsets.all(8.0),
           margin: const EdgeInsets.all(2.0),
           color: Colors.white,
@@ -40,30 +42,33 @@ class CardProduct extends StatelessWidget {
               children: <Widget>[
                 image != null
                     ? Flexible(
-                        flex: 1,
+                        flex: 3,
                         child: Container(
                           child: image,
                         ),
                       )
                     : Container(),
-                Divider(
-                  color: AppTheme.colorOrange,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    name,
-                    maxLines: 2,
-                    style: TextStyle(fontWeight: FontWeight.w700, color: AppTheme.colorTextTitle),
+                Flexible(
+                  flex: 2,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Text(
+                      name,
+                      maxLines: 2,
+                      style: TextStyle(fontWeight: FontWeight.w700, color: AppTheme.colorTextTitle),
+                    ),
                   ),
                 ),
-                RichText(
-                  text: TextSpan(children: <TextSpan>[
-                    TextSpan(text: 'Giá: ', style: TextStyle(color: Colors.black)),
-                    TextSpan(
-                        text: price == 0 ? "Liên hệ" : NumberFormat.currency(customPattern: '#,##0').format(price).replaceAll('.00', " đ"),
-                        style: TextStyle(color: Colors.red)),
-                  ]),
+                Flexible(
+                  flex: 1,
+                  child: RichText(
+                    text: TextSpan(children: <TextSpan>[
+                      TextSpan(text: 'Giá: ', style: TextStyle(color: Colors.black)),
+                      TextSpan(
+                          text: price == 0 ? "Liên hệ" : NumberFormat.currency(customPattern: '#,##0').format(price).replaceAll('.00', " đ"),
+                          style: TextStyle(color: Colors.red)),
+                    ]),
+                  ),
                 ),
               ],
             ),
