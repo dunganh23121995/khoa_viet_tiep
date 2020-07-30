@@ -225,7 +225,6 @@ class _HomePageState extends State {
           color: Colors.white,
           child: ShowProduct(),
         ),
-
       ],
       ),
     );

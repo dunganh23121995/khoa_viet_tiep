@@ -51,14 +51,5 @@ class ProductsBloc {
   }
 
 
-//  static PublishSubject _publishSubjectImageProduct = new PublishSubject();
-//  Stream get imageProduct=>_publishSubjectImageProduct.stream;
-//  getImageWithIdProduct({idproduct}){
-//    ImageProductAPI.Instance().getResponseImageWithIdProduct(idproduct: idproduct).then((response){
-//      if(response.statusCode==200){
-//        var url = ProductsApi.Instance().getJsonBodyfromResponse(response)['GetByIDResponse']['GetByIDResult']['Data']['urlsmall'];
-//      }
-//    });
-//  }
 
 }

@@ -49,4 +49,12 @@ class ProductsApi extends EndPoint{
     ''';
     return getResponse();
   }
+
+  Future getResponseProductDetails({idproduct}){
+    myaction = 'GetByID';
+    ProductsApi.body = '''
+        <id>${idproduct}</id>
+    ''';
+    return getResponse();
+  }
 }

@@ -100,13 +100,16 @@ class ShowProduct extends StatelessWidget {
                         )
                       )
                     ),
-                    child: CardProduct(
+                    child: Container(
                       height: 150,
                       width: 120,
-                      ishot: true,
-                      image: Image.network(linkweb + '/' + product['anhdaidien']),
-                      name: product['title'],
-                      price: int.parse(product['giaban']),
+                      child: CardProduct(
+                        width: double.infinity,
+                        ishot: true,
+                        image: Image.network(linkweb + '/' + product['anhdaidien']),
+                        name: product['title'],
+                        price: int.parse(product['giaban']),
+                      ),
                     ),
                   ));
                 });

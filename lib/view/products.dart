@@ -5,6 +5,7 @@ import 'package:khoaviettiep/bloc_list/products/products_bloc.dart';
 import 'package:khoaviettiep/lists_variable.dart';
 import 'package:khoaviettiep/publiccustom/card_a_product.dart';
 import 'package:khoaviettiep/publiccustom/card_show_product.dart';
+import 'package:khoaviettiep/view/product_details.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class ProductsShow extends StatefulWidget {
@@ -46,25 +47,8 @@ class _ProductsShow extends State {
                             tag: 'productdetails${index}',
                             child: CardProduct(
                               ontap: (){
-                                Navigator.of(context).push(MaterialPageRoute<void>(builder: (context){
-                                  //Builder child
-                                  return Scaffold(
-                                    appBar: AppBar(),
-                                    body: Hero(
-                                      tag: 'productdetails${index}',
-                                      child: CardProduct(
-                                        width:  MediaQuery.of(context).size.width,
-                                        height: MediaQuery.of(context).size.height,
-                                        ishot: snapshot.data[index]['ishot']=="true",
-                                        isnew:snapshot.data[index]['updated']!=null?(DateTime.now().subtract(Duration(days: 365*2))).isBefore(DateTime.parse(snapshot.data[index]['updated'])):false,
-                                        image: Image.network('${linkweb}${snapshot.data[index]['anhdaidien']}',fit: BoxFit.fitWidth,),
-                                        name: snapshot.data[index]['title'],
-                                        price: int.parse(snapshot.data[index]['giaban']),
-                                        cost: int.parse(snapshot.data[index]['giathitruong']),
-                                      ),
-                                    ),
-                                  );
-                                }));
+                                Navigator.of(context).push(MaterialPageRoute<void>(builder: (context)=>ProductDetails
+                                  (idproduct: int.parse(snapshot.data[index]['id']),)));
                               },
                               width: double.infinity,
                               ishot: snapshot.data[index]['ishot']=="true",

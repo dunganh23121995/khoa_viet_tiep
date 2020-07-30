@@ -26,103 +26,105 @@ class CardProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Stack(
-      alignment: Alignment.topCenter,
-      children: <Widget>[
-        Container(
-          height: height,
-          width: width,
-          padding: const EdgeInsets.all(8.0),
-          margin: const EdgeInsets.all(2.0),
-          color: Colors.white,
-          child: InkWell(
-            onTap: ontap,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                image != null
-                    ? Flexible(
-                        flex: 3,
-                        child: Container(
-                          child: image,
+    return Scaffold(
+      body: Stack(
+          alignment: Alignment.topCenter,
+          children: <Widget>[
+            Container(
+              height: height,
+              width: width,
+              padding: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(2.0),
+              color: Colors.white,
+              child: InkWell(
+                onTap: ontap,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    image != null
+                        ? Flexible(
+                            flex: 3,
+                            child: Container(
+                              child: image,
+                            ),
+                          )
+                        : Container(),
+                    Flexible(
+                      flex: 2,
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 20),
+                        child: Text(
+                          name,
+                          maxLines: 2,
+                          style: TextStyle(fontWeight: FontWeight.w700, color: AppTheme.colorTextTitle),
                         ),
-                      )
-                    : Container(),
-                Flexible(
-                  flex: 2,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 20),
-                    child: Text(
-                      name,
-                      maxLines: 2,
-                      style: TextStyle(fontWeight: FontWeight.w700, color: AppTheme.colorTextTitle),
+                      ),
                     ),
-                  ),
+                    Flexible(
+                      flex: 1,
+                      child: RichText(
+                        text: TextSpan(children: <TextSpan>[
+                          TextSpan(text: 'Giá: ', style: TextStyle(color: Colors.black)),
+                          TextSpan(
+                              text: price == 0 ? "Liên hệ" : NumberFormat.currency(customPattern: '#,##0').format(price).replaceAll('.00', " đ"),
+                              style: TextStyle(color: Colors.red)),
+                        ]),
+                      ),
+                    ),
+                  ],
                 ),
-                Flexible(
-                  flex: 1,
-                  child: RichText(
-                    text: TextSpan(children: <TextSpan>[
-                      TextSpan(text: 'Giá: ', style: TextStyle(color: Colors.black)),
-                      TextSpan(
-                          text: price == 0 ? "Liên hệ" : NumberFormat.currency(customPattern: '#,##0').format(price).replaceAll('.00', " đ"),
-                          style: TextStyle(color: Colors.red)),
-                    ]),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-        Positioned(
-          top: 12,
-          left: -8,
-          child: ishot
-              ? Transform.rotate(
-                  angle: 90 / 180 * 3.1412,
-                  child: Container(
-                    child: CustomPaint(
-                      painter: new FlagProductPainter(),
+            Positioned(
+              top: 12,
+              left: -8,
+              child: ishot
+                  ? Transform.rotate(
+                      angle: 90 / 180 * 3.1412,
                       child: Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text(
-                          "Hot".toUpperCase(),
-                          style: TextStyle(color: Colors.red,fontSize: 8,fontWeight: FontWeight.w700),
+                        child: CustomPaint(
+                          painter: new FlagProductPainter(),
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            padding: EdgeInsets.only(left: 5),
+                            child: Text(
+                              "Hot".toUpperCase(),
+                              style: TextStyle(color: Colors.red,fontSize: 8,fontWeight: FontWeight.w700),
+                            ),
+                            height: 10,
+                            width: 32,
+                          ),
                         ),
-                        height: 10,
-                        width: 32,
                       ),
-                    ),
-                  ),
-                )
-              : Container(),
-        ),
-        Positioned(
-          top: 12,
-          left: 6,
-          child: isnew
-              ? Transform.rotate(
-                  angle: 90 / 180 * 3.1412,
-                  child: Container(
-                    child: CustomPaint(
-                      painter: new FlagProductPainter(),
+                    )
+                  : Container(),
+            ),
+            Positioned(
+              top: 12,
+              left: 6,
+              child: isnew
+                  ? Transform.rotate(
+                      angle: 90 / 180 * 3.1412,
                       child: Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(left: 5),
-                        child: Text(
-                          "new".toUpperCase(),
-                          style: TextStyle(color: Colors.black,fontSize: 8,fontWeight: FontWeight.w700),
+                        child: CustomPaint(
+                          painter: new FlagProductPainter(),
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            padding: EdgeInsets.only(left: 5),
+                            child: Text(
+                              "new".toUpperCase(),
+                              style: TextStyle(color: Colors.black,fontSize: 8,fontWeight: FontWeight.w700),
+                            ),
+                            height: 10,
+                            width: 32,
+                          ),
                         ),
-                        height: 10,
-                        width: 32,
                       ),
-                    ),
-                  ),
-                )
-              : Container(),
-        )
-      ],
+                    )
+                  : Container(),
+            )
+          ],
+        ),
     );
   }
 
