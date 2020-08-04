@@ -44,7 +44,7 @@ class _ProductsShow extends State {
                       itemBuilder: (context, index) {
                         return Container(
                           child: Hero(
-                            tag: 'productdetails${index}',
+                            tag: 'productdetails${snapshot.data[index]['id']}',
                             child: CardProduct(
                               ontap: (){
                                 Navigator.of(context).push(MaterialPageRoute<void>(builder: (context)=>ProductDetails

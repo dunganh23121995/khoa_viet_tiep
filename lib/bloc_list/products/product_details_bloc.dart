@@ -14,16 +14,24 @@ class ProductDetailsBloc {
   ProductDetailsBloc.Instance();
 
   static Map productdetails=new Map();
-  static PublishSubject _publishSubjectProducts=new PublishSubject();
-  Stream get productsStream =>_publishSubjectProducts.stream;
+
+  static BehaviorSubject _publishSubjectProducts=new BehaviorSubject();
+  Stream get productStream =>_publishSubjectProducts.stream;
   getProductDetails({@required idproduct}){
     ProductsApi.Instance().getResponseProductDetails(idproduct: idproduct).then((fresponse){
       Response response = fresponse;
       if(response.statusCode==200){
-        print(response.body);
+        var body  = ProductsApi.Instance().getJsonBodyfromResponse(response)['GetByIDResponse']['GetByIDResult'];
+        if(body['ErrCode']==ErrCodeSuccess.toString()){
+          if(body['Data']!=null){
+            productdetails=body['Data'];
+            _publishSubjectProducts.sink.add(productdetails);
+          }
+        }
       }
     });
   }
+
 
 
 }
