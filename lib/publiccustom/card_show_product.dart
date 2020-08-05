@@ -5,8 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:khoaviettiep/AppTheme.dart';
 import 'package:khoaviettiep/bloc_list/homepage/body_bloc.dart';
+import 'package:khoaviettiep/bloc_list/products/product_details_bloc.dart';
 import 'package:khoaviettiep/lists_variable.dart';
 import 'package:khoaviettiep/publiccustom/card_a_product.dart';
+import 'package:khoaviettiep/view/product_details.dart';
 import 'package:khoaviettiep/view/products.dart';
 
 class ShowProduct extends StatelessWidget {
@@ -92,26 +94,37 @@ class ShowProduct extends StatelessWidget {
               if (snapshot.hasData) {
                 List products = snapshot.data;
                 products.forEach((product) {
-                  list.add(Container(
+                  list.add(
+                      Hero(
+                        tag: 'productdetails${product['id']}',
+                        child: Container(
                     decoration: BoxDecoration(
-                      border: Border(
-                        right: BorderSide(
-                          color: AppTheme.colorOrange,
-                        )
-                      )
-                    ),
+                          border: Border(
+                              right: BorderSide(
+                        color: AppTheme.colorOrange,
+                    ))),
                     child: Container(
-                      height: 150,
-                      width: 120,
-                      child: CardProduct(
-                        width: double.infinity,
-                        ishot: true,
-                        image: Image.network(linkweb + '/' + product['anhdaidien']),
-                        name: product['title'],
-                        price: int.parse(product['giaban']),
-                      ),
+                        height: 150,
+                        width: 120,
+                        child: CardProduct(
+                          ontap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductDetails(
+                                          idproduct: int.parse(product['id']),
+                                        )));
+                            ProductDetailsBloc.Instance().getProductDetails(idproduct: product['id']);
+                          },
+                          width: double.infinity,
+                          ishot: true,
+                          image: Image.network(linkweb + '/' + product['anhdaidien']),
+                          name: product['title'],
+                          price: int.parse(product['giaban']),
+                        ),
                     ),
-                  ));
+                  ),
+                      ));
                 });
               }
               return Row(children: list);

@@ -14,10 +14,10 @@ class ProductDetailsBloc {
   ProductDetailsBloc.Instance();
 
   static Map productdetails=new Map();
-
   static BehaviorSubject _publishSubjectProducts=new BehaviorSubject();
   Stream get productStream =>_publishSubjectProducts.stream;
   getProductDetails({@required idproduct}){
+    _numberproduct=1;
     ProductsApi.Instance().getResponseProductDetails(idproduct: idproduct).then((fresponse){
       Response response = fresponse;
       if(response.statusCode==200){
@@ -26,12 +26,17 @@ class ProductDetailsBloc {
           if(body['Data']!=null){
             productdetails=body['Data'];
             _publishSubjectProducts.sink.add(productdetails);
+            _publishSubjectNumberProduct.sink.add(_numberproduct);
           }
         }
       }
     });
   }
 
-
+  int _numberproduct=1;
+  static PublishSubject _publishSubjectNumberProduct = new PublishSubject();
+  Stream get numberproduct{
+    return _publishSubjectNumberProduct.stream;
+  }
 
 }
