@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:khoaviettiep/AppTheme.dart';
 import 'package:khoaviettiep/bloc_list/products/product_details_bloc.dart';
@@ -101,13 +102,14 @@ class _ProductDetails extends State<ProductDetails> {
                                   StreamBuilder(
                                     builder: (context,snapshot){
                                       return Container(
-                                        width: 58,
-                                        height: 38,
+                                        width: 100,
                                         child: TextField(
+                                          scrollPadding: EdgeInsets.all(20),
                                           controller: _textEditingController,
                                           textAlign: TextAlign.center,
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.zero,
                                             filled: true,
                                             isDense: true,
                                             enabledBorder: OutlineInputBorder(

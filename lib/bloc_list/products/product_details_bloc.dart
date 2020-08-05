@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
-import 'package:khoaviettiep/call_api_viettiep/api_image_product.dart';
 import 'package:khoaviettiep/call_api_viettiep/api_products_idmenu.dart';
 import 'package:khoaviettiep/lists_variable.dart';
 import 'package:rxdart/rxdart.dart';
