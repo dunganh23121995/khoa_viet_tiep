@@ -6,6 +6,7 @@ class AppTheme{
   AppTheme._();
 
   static const Color colorOrange = Color(0xfffc9c00);
+  static const Color colorBackgroungScaffold = Color(0xfff1f4fd);
   static const Color colorTitleShowProduct1 = Color(0xffffffff);
   static const Color colorTitleShowProduct2 = Color(0xfffc9c00);
   static const Color colorTextTitle = Color(0xfffc9c00);

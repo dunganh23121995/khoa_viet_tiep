@@ -42,6 +42,7 @@ dependencies:
   xml2json: any
   animated_overflow: ^1.0.1
   loading_indicator: ^1.2.0
+  flutter_html: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
